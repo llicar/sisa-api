@@ -2,6 +2,6 @@ import { app } from './app.js';
 
 const port = process.env.PORT ? process.env.PORT : 3001;
 
-app.listen(port, host, () => {
+app.listen(port, () => {
   console.log(`***** SERVER STARTED ON PORT ${port} *****`);
 });
