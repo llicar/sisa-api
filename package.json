@@ -10,7 +10,7 @@
     "dev": "nodemon --experimental-modules src/server.js",
     "dev:debug": "nodemon --inspect src/server.js",
     "build": "babel src -d dist -s",
-    "start": "node dist/src/server.js"
+    "start": "node src/server.js"
   },
   "keywords": [],
   "author": "",
