@@ -38,11 +38,24 @@ class JovensController {
     }
 
     async create(request, response) {
-        
+
 
         try {
             await Jovens.cadastrarJovem(request.body);
             console.log('Inserido com suscesso')
+            return response.status(201).json({ message: 'Suscesso' });
+
+        } catch (error) {
+            console.log(error)
+            return response.status(500).json({ message: error.message });
+        }
+    }
+
+    async deletarAdmissao(request, response) {
+        console.log('controller: ' + request.body.data)
+        try {
+            await Jovens.deletarAdmissao(request.body.id);
+            console.log('Deletado com suscesso')
             return response.status(201).json({ message: 'Suscesso' });
 
         } catch (error) {

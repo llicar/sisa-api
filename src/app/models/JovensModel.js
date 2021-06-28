@@ -39,6 +39,18 @@ class Jovens {
                 .returning('*')
     }
 
+    //Deletar admissao
+    async deletarAdmissao(id) {
+
+        console.log(id)
+
+        return await
+            database('jovens')
+                .delete()
+                .where('id_jovem', '=', id)
+                .returning('*')
+    }
+
     //Enviar datas e calendaio
     async updateJovem1(data, id) {
 
@@ -109,10 +121,13 @@ class Jovens {
                     'jovens.admissao',
                     'jovens.status',
                     'empresas.nome_fantasia',
-                    'etapa'
+                    'inclusao_calendario',
+                    'inclusao_pessoais',
+                    'inclusao',
+                    'finalizado'
                 )
                 .orderBy('admissao', 'desc')
-                .where('jovens.etapa', '<', 4)
+                .where('jovens.finalizado', '=', 0)
     }
 }
 

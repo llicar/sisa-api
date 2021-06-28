@@ -28,4 +28,6 @@ routes.post('/updateEtapa/:id', auth, JovensController.updateEtapa);
 routes.get('/empresas', auth, EmpresasController.index);
 routes.post('/empresas', auth, EmpresasController.create);
 
+routes.post('/deletarAdmissao', auth, JovensController.deletarAdmissao);
+
 export default routes;
