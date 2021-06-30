@@ -23,11 +23,11 @@ routes.post('/update1/:id', auth, upload.single('calendario'), JovensController.
 routes.post('/update2/:id', auth, JovensController.update2);
 
 routes.post('/anotacoes/:id', auth, JovensController.createNote);
-routes.post('/updateEtapa/:id', auth, JovensController.updateEtapa);
+routes.post('/finalizarAdmissao/:id', auth, JovensController.finalizarAdmissao);
 
 routes.get('/empresas', auth, EmpresasController.index);
 routes.post('/empresas', auth, EmpresasController.create);
 
-routes.post('/deletarAdmissao', auth, JovensController.deletarAdmissao);
+routes.post('/deletarAdmissao/:id', auth, JovensController.deletarAdmissao);
 
 export default routes;

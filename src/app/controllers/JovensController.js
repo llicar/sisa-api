@@ -52,9 +52,9 @@ class JovensController {
     }
 
     async deletarAdmissao(request, response) {
-        console.log('controller: ' + request.body.data)
+        const { id } = request.params;
         try {
-            await Jovens.deletarAdmissao(request.body.id);
+            await Jovens.deletarAdmissao(id);
             console.log('Deletado com suscesso')
             return response.status(201).json({ message: 'Suscesso' });
 
@@ -106,11 +106,11 @@ class JovensController {
         }
     }
 
-    async updateEtapa(request, response) {
+    async finalizarAdmissao(request, response) {
         const { id } = request.params;
 
         try {
-            await Jovens.updateEtapa(id)
+            await Jovens.finalizarAdmissao(id)
             console.log('Atualizado com suscesso!')
             return response.status(201).json({ message: 'Suscesso' });
         } catch (error) {

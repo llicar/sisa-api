@@ -44,11 +44,19 @@ class Jovens {
 
         console.log(id)
 
-        return await
-            database('jovens')
+        const deletarAdmissao =
+            await database('alteracoes')
                 .delete()
-                .where('id_jovem', '=', id)
+                .where('jovem_id', '=', id)
                 .returning('*')
+
+        await database('jovens')
+            .delete()
+            .where('id_jovem', '=', id)
+            .returning('*')
+
+        return deletarAdmissao;
+
     }
 
     //Enviar datas e calendaio
@@ -79,12 +87,12 @@ class Jovens {
                 .returning("*")
     }
 
-    async updateEtapa(id) {
+    async finalizarAdmissao(id) {
 
         return await
             database('jovens')
                 .where({ id_jovem: id })
-                .update({ etapa: 4 })
+                .update({ finalizado: 1 })
                 .returning("*")
     }
 
