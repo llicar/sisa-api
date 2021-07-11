@@ -1,8 +1,7 @@
 import database from '../../config/database.js';
-import md5 from 'md5';
+import { objToUpperCase } from '../utils/upperCase.js'
 
 class Jovens {
-
     //Função para listar todos os jovens
     async listarJovens() {
         const listarJovens = await
@@ -33,16 +32,15 @@ class Jovens {
     //Função para cadastrar jovem
     async cadastrarJovem(data) {
 
+        const upperCaseData = objToUpperCase(data);
         return await
             database('jovens')
-                .insert(data)
+                .insert(upperCaseData)
                 .returning('*')
     }
 
     //Deletar admissao
     async deletarAdmissao(id) {
-
-        console.log(id)
 
         const deletarAdmissao =
             await database('alteracoes')
@@ -64,12 +62,16 @@ class Jovens {
 
         const { calendario, calendarName, ...dataJovem } = data;
 
+        const upperCaseData = objToUpperCase(dataJovem);
+
         const finalCalendarName = `${id}-${calendarName}`
 
         const calendar = {
             'calendario': finalCalendarName
         }
-        const finalData = Object.assign(dataJovem, calendar);
+
+
+        const finalData = Object.assign(upperCaseData, calendar);
 
         return await
             database('jovens')
@@ -80,10 +82,12 @@ class Jovens {
 
     async updateJovem2(data, id) {
 
+        const upperCaseData = objToUpperCase(data);
+
         return await
             database('jovens')
                 .where({ id_jovem: id })
-                .update(data)
+                .update(upperCaseData)
                 .returning("*")
     }
 
