@@ -29,5 +29,6 @@ routes.get('/empresas', auth, EmpresasController.index);
 routes.post('/empresas', auth, EmpresasController.create);
 
 routes.post('/deletarAdmissao/:id', auth, JovensController.deletarAdmissao);
+routes.post('/desligarJovem/:id', auth, JovensController.desligarJovem);
 
 export default routes;
