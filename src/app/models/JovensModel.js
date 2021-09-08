@@ -1,5 +1,7 @@
 import database from '../../config/database.js';
 import { objToUpperCase } from '../utils/upperCase.js'
+import { format, isValid } from 'date-fns'
+import ptBR from 'date-fns/locale/pt-BR/index.js'
 
 class Jovens {
     //Função para listar todos os jovens
@@ -138,8 +140,27 @@ class Jovens {
                     'inclusao',
                     'finalizado'
                 )
-                .orderBy('admissao', 'desc')
+                .orderBy([{ column: 'admissao', order: 'desc' }, { column: 'nome' }],)
                 .where('jovens.finalizado', '=', 0)
+    }
+
+    async desligarJovem(data, id) {
+
+        // Busca da data de demissao do aprendiz
+        const demissao = await
+            database('jovens')
+                .where({ id_jovem: id })
+                .select('demissao')
+
+        // formata data de demissao
+        const prevDesligamento = format(demissao[0].demissao, 'yyyy-MM-dd', { locale: ptBR });
+
+        data = { ...data, prev_desligamento: prevDesligamento, status: 'inativo' };
+
+        await database('jovens')
+            .where({ id_jovem: id })
+            .update(data)
+            .returning("*")
     }
 }
 

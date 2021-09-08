@@ -64,6 +64,22 @@ class JovensController {
         }
     }
 
+    async desligarJovem(request, response) {
+        const { id } = request.params;
+
+        console.log(request.body)
+
+        try {
+            await Jovens.desligarJovem(request.body, id);
+            console.log('Desligado com suscesso')
+            return response.status(201).json({ message: 'Suscesso' });
+
+        } catch (error) {
+            console.log(error)
+            return response.status(500).json({ message: error.message });
+        }
+    }
+
     async update1(request, response) {
 
         const { id } = request.params;
