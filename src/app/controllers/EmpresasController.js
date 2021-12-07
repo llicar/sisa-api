@@ -27,5 +27,18 @@ class EmpresasController {
             return response.status(500).json({ message: 'Falha ao buscar' })
         }
     }
+
+    async BuscarEmpresaPorId(request, response) {
+
+        const { id } = request.params;
+        try {
+            const empresa = await Empresas.buscarEmpresaPorId(id);
+            return response.status(200).json(empresa);
+        }
+        catch (err) {
+            console.log(err.message);
+            return response.status(500).json({ message: 'Falha ao buscar' })
+        }
+    }
 }
 export default new EmpresasController;

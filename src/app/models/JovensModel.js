@@ -16,6 +16,15 @@ class Jovens {
         return listarJovens;
     }
 
+    //Função para listar todos os jovens
+    async inventario() {
+        const inventario = await
+            database('inventario_ativos')
+                .select('*')
+                .orderBy('nome');
+        return inventario;
+    }
+
     //Função para buscar jovem por ID
     async buscarJovemPorId(id) {
 
@@ -29,6 +38,16 @@ class Jovens {
                 .where({ 'jovens.id_jovem': id });
 
         return jovem;
+    }
+
+    async buscarJovensPorEmpresa(idEmpresa) {
+
+        const jovens = await
+            database('jovens')
+                .select('jovens.nome', 'jovens.admissao', 'jovens.demissao')
+                .where({ 'jovens.empresa_id': idEmpresa })
+
+        return jovens;
     }
 
     //Função para cadastrar jovem

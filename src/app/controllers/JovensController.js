@@ -13,6 +13,16 @@ class JovensController {
         }
     }
 
+    async inventario(request, response) {
+
+        try {
+            const inventario = await Jovens.inventario();
+            return response.json(inventario);
+        } catch (error) {
+            return response.status(500).json({ message: error.message });
+        }
+    }
+
     async show(request, response) {
 
         const { id } = request.params;
@@ -37,8 +47,20 @@ class JovensController {
         }
     }
 
-    async create(request, response) {
+    async buscarJovensPorEmpresa(request, response) {
 
+        const { idEmpresa } = request.params;
+
+        try {
+            const jovens = await Jovens.buscarJovensPorEmpresa(idEmpresa)
+            return response.status(200).json(jovens)
+        } catch (error) {
+            console.log(error)
+            return response.status(500).json({ message: error.message })
+        }
+    }
+
+    async create(request, response) {
 
         try {
             await Jovens.cadastrarJovem(request.body);
