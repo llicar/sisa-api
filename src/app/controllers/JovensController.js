@@ -61,15 +61,16 @@ class JovensController {
     }
 
     async create(request, response) {
-
         try {
             await Jovens.cadastrarJovem(request.body);
             console.log('Inserido com suscesso')
-            return response.status(201).json({ message: 'Suscesso' });
+            return response.status(201)
+                .json({ message: 'Suscesso' });
 
         } catch (error) {
             console.log(error)
-            return response.status(500).json({ message: error.message });
+            return response.status(500)
+                .json({ message: error.message });
         }
     }
 
