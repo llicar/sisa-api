@@ -1,7 +1,7 @@
 import database from '../../config/database.js';
-import { objToUpperCase } from '../utils/upperCase.js'
-import { format, isValid } from 'date-fns'
-import ptBR from 'date-fns/locale/pt-BR/index.js'
+import { objToUpperCase } from '../utils/upperCase.js';
+import { format, isValid } from "date-fns";
+import ptBR from "date-fns/locale/pt-BR/index.js";
 
 class Jovens {
     //Função para listar todos os jovens
@@ -16,7 +16,7 @@ class Jovens {
         return listarJovens;
     }
 
-    //Função para listar todos os jovens
+    //Função para listar o inventário de jovens
     async inventario() {
         const inventario = await
             database('inventario_ativos')
