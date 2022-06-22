@@ -11,7 +11,7 @@ class Jovens {
             database('jovens')
                 .join('empresas', 'jovens.empresa_id', '=', 'empresas.id_empresa')
                 .select('*')
-                .orderBy('admissao', 'desc');
+                .orderBy('nome');
         console.log(listarJovens)
         return listarJovens;
     }
