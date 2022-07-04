@@ -2,7 +2,7 @@
 import Router from 'express';
 import JovensController from './app/controllers/JovensController.js';
 import EmpresasController from './app/controllers/EmpresasController.js';
-import LoginController from './app/controllers/LoginController.js';
+import UsuarioController from './app/controllers/UsuarioController.js';
 import ModalidadeController from './app/controllers/ModalidadeController.js';
 import FaltasController from './app/controllers/FaltasController.js';
 
@@ -16,7 +16,7 @@ const uploadCalendario = multer(multerConfigCalendario);
 const uploadAtestado = multer(multerConfigAtestado);
 
 //Rota de login
-routes.post('/login', LoginController.login);
+routes.post('/login', UsuarioController.login);
 
 //Rotas da entidade Jovem
 routes.get('/jovens', auth, JovensController.index); //Buscar todos os jovems
@@ -51,6 +51,8 @@ routes.get('/faltas', auth, FaltasController.index);
 routes.get('/faltas/:id', auth, FaltasController.buscarFaltaPorId);
 
 routes.get('/modalidade', auth, ModalidadeController.index);
+
+routes.get('/permissoes/:id', UsuarioController.buscarPermissoes);
 
 
 
