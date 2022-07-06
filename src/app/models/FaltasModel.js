@@ -19,7 +19,6 @@ class Faltas {
                     'faltas_aprendizes.horas_falta',
                     'faltas_aprendizes.atividade',
                     'faltas_aprendizes.status_falta',
-                    'faltas_aprendizes.status_falta',
                     'faltas_aprendizes.atestado',
                     'faltas_aprendizes.detalhes',
                     'faltas_aprendizes.periodo_falta',
@@ -48,8 +47,10 @@ class Faltas {
                 'faltas_aprendizes.atestado',
                 'faltas_aprendizes.detalhes',
                 'faltas_aprendizes.periodo_falta',
+                'usuarios.nome_usuario',
             )
             .join('jovens', 'faltas_aprendizes.jovem_id', '=', 'jovens.id_jovem')
+            .join('usuarios', 'faltas_aprendizes.responsavel_falta', '=', 'usuarios.id_usuario')
             .join('empresas', 'jovens.empresa_id', '=', 'empresas.id_empresa')
             .where('id_falta', '=', id);
 
