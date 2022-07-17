@@ -52,7 +52,8 @@ class Faltas {
             .join('jovens', 'faltas_aprendizes.jovem_id', '=', 'jovens.id_jovem')
             .join('usuarios', 'faltas_aprendizes.responsavel_falta', '=', 'usuarios.id_usuario')
             .join('empresas', 'jovens.empresa_id', '=', 'empresas.id_empresa')
-            .where('id_falta', '=', id);
+            .where('id_falta', '=', id)
+            .returning('*')
 
         return falta;
     }
@@ -103,7 +104,6 @@ class Faltas {
                 { 'atestado': atestadoHash, 'data_falta': data_falta }
             );
 
-            console.log('entrou data unica')
             return await
                 database('faltas_aprendizes')
                     .insert(finalData)
@@ -125,13 +125,11 @@ class Faltas {
                         'detalhes': data.detalhes,
                         'periodo_falta': data.periodo_falta,
                         'atestado': atestadoHash,
-                        'data_falta': index
+                        'data_falta': index,
+                        'responsavel_falta': data.responsavel_falta,
                     }
                 )
             })
-
-            console.log('entrou lote')
-            console.log(data_ultima_falta)
             return await
                 database('faltas_aprendizes')
                     .insert(batch)
